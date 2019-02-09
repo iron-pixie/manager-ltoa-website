@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+/*@import "./app/dark-green-theme.css";*/
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+
+mat-divider{
+    padding-top:5px;
+    padding-bottom:10px;
+    padding-left:20px;
+}
+
+mat-form-field{
+    padding-left:20px;
+    width:300px;
+}
+

@@ -1,0 +1,100 @@
+<form [formGroup]="formGroup">
+  <mat-form-field>
+    <input 
+      class="form-control" 
+      type="text" 
+      formControlName="name" 
+      required 
+      matInput 
+      placeholder="Name">
+    <mat-error *ngIf=true>
+      Name is required
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select 
+      class="form-control"
+      formControlName="userLevel"
+      required
+      matInput
+      placeholder="User Level">
+      <mat-option  
+        *ngFor="let user of userLevel" 
+        [value]="user.value">
+        {{ user.viewValue }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf=true>
+      User Level is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-divider></mat-divider>
+
+  <mat-form-field>
+    <input 
+      class="form-control" 
+      type="text" 
+      formControlName="userName" 
+      required 
+      matInput
+      placeholder="Username"> 
+    <mat-error *ngIf=true>
+      Username is required
+    </mat-error>   
+  </mat-form-field>
+  <mat-form-field>
+    <input 
+      class="form-control" 
+      type="password" 
+      formControlName="password" 
+      required 
+      matInput
+      placeholder="Password">
+    <mat-error *ngIf=true>
+      Password is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-divider></mat-divider>
+
+  <mat-form-field>
+    <input 
+      class="form-control" 
+      type="email" 
+      formControlName="email"  
+      matInput
+      placeholder="Email Address">
+    <mat-error *ngIf="formGroup.get('email').hasError('email') ">
+      Please enter a valid email address
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input 
+      class="form-control" 
+      type="tel" 
+      formControlName="contactNumber"  
+      matInput
+      placeholder="Phone Number">
+  </mat-form-field>
+
+  <mat-divider></mat-divider>
+
+  <mat-form-field *ngIf="formGroup.get('userLevel').value=='resident'">
+    <input 
+      class="form-control" 
+      type="text" 
+      formControlName="memberAddress" 
+      required 
+      matInput
+      placeholder="Address">
+    <mat-error *ngIf=true>
+      Address is required
+    </mat-error>
+  </mat-form-field>
+
+  <div id="faceControl" *ngIf="failure">Fill all required fields </div>
+  
+  <button mat-raised-button type="button" (click)="tryRegister(formGroup)">Submit</button>
+  <button mat-raised-button type="button" (click)="back()">Back</button>
+</form>

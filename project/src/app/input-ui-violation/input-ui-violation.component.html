@@ -1,0 +1,100 @@
+<form [formGroup]="formGroup">
+    <div class="column">
+      <mat-card class='ticket-detail-card'>
+        <div class="form-group"> 
+      
+          <mat-form-field class="example-full-width">
+                <input 
+                  class="form-control"
+                  formControlName="address"
+                  matInput 
+                  placeholder="Address" 
+                  value="{{addressValue}}"
+                  required>
+                  <mat-error *ngIf=true>
+                    Address is required
+                  </mat-error>
+          </mat-form-field>
+                  
+          <mat-form-field>
+            <mat-select 
+              class="form-control"
+              formControlName="type"
+              placeholder="Type of the violation"
+              required>
+              <mat-option 
+                *ngFor="let type of types" 
+                [value]="type.value">
+                {{ type.viewValue }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf=true>
+              Type is required
+            </mat-error>
+          </mat-form-field>
+        
+          <mat-form-field>
+            <mat-select 
+              class="form-control"
+              formControlName="status"
+              placeholder="Status of the violation"
+              required>
+              <mat-option 
+                *ngFor="let status of statuses" 
+                [value]="status.value">
+                {{ status.viewValue }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf=true>
+              Status is required
+            </mat-error>
+          </mat-form-field>
+        
+          <mat-form-field class="example-full-width">
+              <input 
+                class="form-control"
+                formControlName="responsibleManager"
+                matInput 
+                placeholder="Responsible Manager" 
+                value="{{responsibleManagerValue}}"
+                required>
+                <mat-error *ngIf=true>
+                  Responsible manager is required
+                </mat-error>
+            </mat-form-field>
+              
+          <mat-form-field class="example-full-width">
+            <input 
+              class="form-control"
+              formControlName="fine"
+              matInput 
+              placeholder="Fine" 
+              value="{{fineValue}}">
+          </mat-form-field>
+        
+          <mat-form-field class="example-full-width">
+              <input 
+                class="form-control"
+                formControlName="notes"
+                matInput 
+                placeholder="Notes" 
+                value="{{notesValue}}">
+          </mat-form-field>
+        
+          <button mat-raised-button type="button" (click)="submit(formGroup)">Submit</button>
+          <button mat-raised-button type="button" (click)="back()">Back</button>  
+              
+        </div> 
+      </mat-card>
+    </div>
+  
+    <div ng-app="addPhotos">
+        <div class="column">
+          <mat-card class='ticket-add-picture-card'>
+            <h3>Add Photos</h3>
+            <input type="file" (change)="imageChange($event)" placeholder="Upload pictures related to this task" value={{file}}>
+          </mat-card> 
+        </div> 
+    </div>
+    
+  </form>

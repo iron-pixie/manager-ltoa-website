@@ -1,0 +1,45 @@
+.topLevelDiv{
+    position:fixed;
+    right:12%;
+    top:40%;
+}
+
+.photoDiv{
+    position: inherit;
+    left: 5%;
+    top: 10%;
+    width: 55%;
+    height:80%;
+    /*outline: 1px solid black;*/
+}
+
+.topTopLevelDiv{
+    position: fixed;
+    width: 95%;
+    height: 90%;
+    left: 2.5%;
+    top: 5%;
+    outline-color: #1E8301;
+    outline-style: double;
+    outline-width: 10px;
+}
+
+.titleHeader{
+    position: fixed;
+    right:4%;
+    top:20%;
+    height:30%;
+    width:30%;
+}
+
+button{
+    margin-left:6px;
+    margin-top:8px;
+}
+
+img{
+    height:90%;
+    width:50%;
+    margin-left:25%;
+    margin-top: 2.5%;
+}

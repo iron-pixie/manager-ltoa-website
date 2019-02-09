@@ -1,0 +1,53 @@
+<form [formGroup]="formGroup">
+  <div class="form-group">
+
+      <mat-form-field class="example-full-width">
+          <input 
+            class="form-control"
+            formControlName="reason"
+            matInput 
+            placeholder="Reason for the visit" 
+            value="">
+        </mat-form-field>
+  
+      <mat-divider></mat-divider>
+      
+      <mat-form-field class="example-full-width">
+        <input 
+          class="form-control"
+          formControlName="date"
+          matInput 
+          type="date"
+          placeholder="Date of the event" 
+          value=""
+          required>
+          <mat-error >
+            Date is required
+          </mat-error>
+    </mat-form-field>
+
+    <mat-divider></mat-divider>
+    <div 
+      formArrayName="guestArray" 
+      *ngFor="let guest of formGroup.get('guestArray').controls; let i = index;" class="a{{i%3}}">
+        <mat-form-field class="example-full-width">
+          <input 
+            class="form-control"
+            [formControlName]="i"
+            matInput 
+            placeholder="Guest Name" 
+            value=""
+            required>
+            <mat-error >
+              Guest Name is required
+            </mat-error>
+        </mat-form-field>
+        <a (click)="removeFromGuestArray(i)">remove</a>
+        <div *ngIf="tryRemoveLast" class="alert">Must have at least 1 guest</div>
+        <br>
+      </div>
+
+    <button class="guestButton" mat-raised-button type="button" (click)="addToGuestArray()">Add Guest</button>
+    <button class="submitButton" mat-raised-button type="button" [disabled]="formGroup.invalid" (click)="submit(formGroup)" >submit</button>
+  </div>
+</form>

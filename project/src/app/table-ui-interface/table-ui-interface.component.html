@@ -1,0 +1,24 @@
+<button mat-mini-fab [routerLink]="inputRouterString" *ngIf="displayAddButton"><mat-icon>add</mat-icon></button>
+<mat-checkbox *ngIf="displayCheckBox" (click)="filterCheckBox()" [(ngModel)]="checked">Only show my information</mat-checkbox>
+
+<mat-table [dataSource]="dataSource">
+
+    <ng-template ngFor let-key let-i="index" [ngForOf]="keys">
+      <ng-container matColumnDef={{key}}>
+        <mat-header-cell *matHeaderCellDef>{{columnNames[i]}}</mat-header-cell>
+        <mat-cell *matCellDef="let violation">{{violation[key]}}</mat-cell>
+      </ng-container>
+    </ng-template>
+  
+    <ng-container *ngIf="includeDetails" matColumnDef="detailsButton">
+      <mat-header-cell *matHeaderCellDef>Details</mat-header-cell>
+      <mat-cell *matCellDef="let violation">  
+          <button mat-raised-button [routerLink]="detailsRouterString+violation.id" >details</button>
+      </mat-cell>
+    </ng-container>
+    
+  
+    <mat-header-row *matHeaderRowDef="columnDef"></mat-header-row>
+    <mat-row *matRowDef="let myRowData; columns: columnDef"></mat-row>
+  
+  </mat-table>

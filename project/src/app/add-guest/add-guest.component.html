@@ -1,0 +1,127 @@
+<a routerLink="/web/addMultiGuest">Add multiple guests</a>
+<div class="topLevelDiv">
+  <form [formGroup]="formGroup">
+      <div class="form-group">
+    
+        <mat-form-field class="example-full-width">
+          <input 
+            class="form-control"
+            formControlName="guestName"
+            matInput 
+            placeholder="Guest Name" 
+            value=""
+            required>
+            <mat-error >
+              Guest Name is required
+            </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="example-full-width">
+          <input 
+            class="form-control"
+            formControlName="reason"
+            matInput 
+            placeholder="Reason for the visit" 
+            value="">
+        </mat-form-field>
+  
+      <mat-divider></mat-divider>
+      
+      <mat-form-field class="example-full-width">
+        <input 
+          class="form-control"
+          formControlName="allowedStartTime"
+          matInput 
+          type="date"
+          placeholder="Earliest date to allow the guest in" 
+          value=""
+          required>
+          <mat-error >
+            Start time is required
+          </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field class="example-full-width">
+      <input 
+        class="form-control"
+        formControlName="allowedEndTime"
+        matInput 
+        type="date"
+        placeholder="Latest date to allow the guest in" 
+        value=""
+        required>
+        <mat-error >
+          End time is required
+        </mat-error>
+    </mat-form-field>
+  
+    <input type="checkbox" (change)="submitCheckbox($event)">
+    <span>Allow Guest Indefinetly</span>
+  
+      <div *ngIf="isSecurity">
+        <mat-divider></mat-divider>
+  
+        <mat-form-field class="example-full-width">
+          <input 
+            class="form-control"
+            formControlName="residentAddress"
+            matInput 
+            type="text"
+            placeholder="Resident Address" 
+            value=""
+            required
+            [matAutocomplete]="autoAddress"
+            (keyup)="sortDropdown()">
+            <mat-error >
+              Resident address is required
+            </mat-error>
+            <mat-autocomplete #autoAddress="matAutocomplete">
+              <mat-option 
+                *ngFor="let option of residentAddressSource?.filteredData" 
+                [value]="option.memberAddress"
+                (click)="memberFieldsFill(option)">
+                {{option.memberAddress}}
+              </mat-option>
+            </mat-autocomplete> 
+        </mat-form-field>
+  
+        <mat-form-field class="example-full-width">
+          <input 
+            class="form-control"
+            formControlName="residentName"
+            matInput 
+            type="text"
+            placeholder="Resident Name" 
+            value=""
+            required
+            [matAutocomplete]="autoName"
+            (keyup)="sortDropdown()">
+            <mat-error >
+              Resident name is required
+            </mat-error>
+            <mat-autocomplete #autoName="matAutocomplete">
+              <mat-option 
+                *ngFor="let option of residentNameSource?.filteredData" 
+                [value]="option.memberName"
+                (click)="memberFieldsFill(option)">
+                {{option.memberName}}
+              </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+  
+      </div>
+  
+      <mat-divider></mat-divider>
+  
+      <!--<div *ngIf="!isSecurity">
+        <h3>Photo of the guest will speed up getting through security</h3>
+        <input type="file" (change)="imageChange($event)" placeholder="Upload pictures related to this task">
+        <mat-divider ></mat-divider>
+      </div>-->
+  
+      <button class="submitButton" mat-raised-button type="button" [disabled]="formGroup.invalid" (click)="submit(formGroup)" >submit</button>
+      <button class="cancelButton" mat-raised-button type="button" (click)=back()>cancel</button>
+        
+    </div> 
+  </form>
+</div>

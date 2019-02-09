@@ -1,0 +1,30 @@
+<div class="topTopLevelDiv">
+  <div class="photoDiv">
+    <img src="https://s3-us-west-2.amazonaws.com/ipt-photo-bucket/1024.png">
+  </div>
+  <H3 class="titleHeader">La Triomphe Security Portal</H3>
+  <div class="topLevelDiv">
+    <form [formGroup]="formGroup" *ngIf="!loginFinished">
+      <label for="#userName">Username:</label>
+      <input 
+        id="userName" 
+        class="form-control" 
+        type="text" 
+        formControlName="userName" 
+        required
+        (keyup.enter)=tryLogin(formGroup.value)>
+      <label for="#password">Password:</label>
+      <input 
+        id="password" 
+        class="form-control" 
+        type="password" 
+        formControlName="password" 
+        required
+        (keyup.enter)=tryLogin(formGroup.value)>
+      <button mat-raised-button type="button" [disabled]="!formGroup.valid" (click)="tryLogin(formGroup.value)">Login</button>
+      <button mat-raised-button type="button" (click)="goToRegister()">Create Account</button>
+    </form> 
+    <div *ngIf="loginError" >Login unsuccessful username or password incorrect</div>
+    <div *ngIf="loginFinished">{{userLoggedIn}}</div>
+  </div>
+</div>

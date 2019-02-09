@@ -1,0 +1,18 @@
+<br><br><mat-divider></mat-divider>
+<mat-card>
+  <p>Residents seaking account approval</p>
+  <mat-divider></mat-divider><br>
+  <div *ngFor="let data of dataArray; index as i;">
+    <button class="buttonList" mat-stroked-button (click)="checkApproval(i)">
+      {{data.Name}}
+    </button>
+    <br><br>
+  </div>
+    
+</mat-card>
+<mat-card *ngIf="readyToApprove">
+  <p *ngIf="inApproval">{{focusedData.Name}}</p><br>
+  <p *ngIf="!inApproval">{{approvalStatus}}</p><br>
+  <button mat-raised-button *ngIf="inApproval" (click)="approveRegistration()">Approve</button>
+  <button mat-raised-button *ngIf="inApproval" (click)="disapproveRegistration()">Deny</button>
+</mat-card>

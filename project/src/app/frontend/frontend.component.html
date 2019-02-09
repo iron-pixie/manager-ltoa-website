@@ -1,0 +1,75 @@
+<form [formGroup]="violationForm">
+    <div class="form-group">
+  
+      <mat-form-field class="example-full-width">
+        <input 
+          class="form-control"
+          formControlName="address"
+          matInput 
+          placeholder="Address" 
+          value="">
+      </mat-form-field>
+        
+      <mat-form-field>
+        <mat-select 
+          class="form-control"
+          formControlName="type"
+          placeholder="Type of the violation">
+          <mat-option 
+            *ngFor="let type of types" 
+            [value]="type.value">
+            {{ type.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+        
+      <mat-form-field>
+        <input 
+          class="form-control"
+          formControlName="createDate"
+          matInput 
+          type="date" 
+          placeholder="Todays Date" 
+          value="">
+      </mat-form-field>
+        
+      <mat-form-field>
+        <mat-select 
+          class="form-control"
+          formControlName="status"
+          placeholder="Status of the violation">
+          <mat-option 
+            *ngFor="let status of statuses" 
+            [value]="status.value">
+            {{ status.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+        
+      <button mat-raised-button (click)="submit(violationForm)">submit</button>
+    
+    </div> 
+  </form>
+
+
+<mat-table [dataSource]="violationSource">
+
+  <ng-template ngFor let-key [ngForOf]="keys">
+    <ng-container matColumnDef={{key}}>
+      <mat-header-cell *matHeaderCellDef>{{key}}</mat-header-cell>
+      <mat-cell *matCellDef="let violation">{{violation[key]}}</mat-cell>
+    </ng-container>
+  </ng-template>
+
+  <ng-container matColumnDef="detailsButton">
+    <mat-header-cell *matHeaderCellDef>details</mat-header-cell>
+    <mat-cell *matCellDef="let violation">  
+        <button mat-raised-button (click)="detailsClick(violation)">details</button>
+    </mat-cell>
+  </ng-container>
+  
+
+  <mat-header-row *matHeaderRowDef="columnDef"></mat-header-row>
+  <mat-row *matRowDef="let myRowData; columns: columnDef"></mat-row>
+
+</mat-table>

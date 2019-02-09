@@ -1,0 +1,10 @@
+.topLevelDiv{
+    position: fixed;
+    width: 95%;
+    height: 85%;
+    left: 2%;
+    top: 10%;
+    outline-color: #1E8301;
+    outline-style: double;
+    outline-width: 10px;
+}

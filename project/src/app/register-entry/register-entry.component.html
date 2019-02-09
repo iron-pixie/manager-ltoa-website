@@ -1,0 +1,144 @@
+<div class="topLevelDiv">
+  <form [formGroup]="searchParams">
+    <mat-card class="search-params">Search Guest Database
+  
+      <br><br>
+      <!--<mat-divider></mat-divider>-->
+  
+      <mat-form-field class="example-full-width">
+        <input 
+          class="form-control"
+          formControlName="residentName"
+          matInput 
+          placeholder="Resident Name" 
+          value=""
+          [matAutocomplete]="autoName"
+          (keyup)="sortDropdown()"
+        >  
+        <mat-autocomplete #autoName="matAutocomplete">
+          <mat-option 
+            *ngFor="let option of residentNameSource?.filteredData;let i = index" 
+            [value]="option.memberName"
+            (click)="filterResidentData(i)">
+            {{option.memberName}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    
+      <mat-divider></mat-divider>
+
+      <br><br>
+  
+      <mat-form-field class="example-full-width">
+        <input 
+          class="form-control"
+          formControlName="residentAddress"
+          matInput 
+          placeholder="Resident Address" 
+          value=""
+          [matAutocomplete]="auto"
+          (keyup)="sortDropdown()"
+        >
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option 
+            *ngFor="let option of residentAddressSource?.filteredData;let i = index" 
+            [value]="option.memberAddress"
+            (click)="filterResidentData(i)">
+            {{option.memberAddress}}
+          </mat-option>
+        </mat-autocomplete>  
+      </mat-form-field>
+  
+      <mat-divider></mat-divider>
+      <br><br>
+  
+      <mat-form-field class="example-full-width">
+        <input 
+          class="form-control"
+          formControlName="guestName"
+          matInput 
+          placeholder="Guest Name" 
+          value=""
+          (keyup)="sortDropdown()"
+        >  
+        <!--<mat-autocomplete #autoGuest="matAutocomplete">
+          <mat-option 
+            *ngFor="let option of guestNameSource?.filteredData" 
+            [value]="option.guestName"
+            (click)="filterResidentData()">
+            {{option.guestName}}
+          </mat-option>
+        </mat-autocomplete>-->
+      </mat-form-field>
+
+      <mat-divider></mat-divider>
+      <br><br>
+
+      <mat-form-field class="example-full-width">
+          <input 
+            class="form-control"
+            formControlName="phone"
+            matInput 
+            placeholder="Phone Number" 
+            value=""
+            (keyup)="sortDropdown()"
+          >  
+        </mat-form-field>
+  
+      <!--<mat-divider></mat-divider>-->
+  
+      <!--<button mat-raised-button (click)="searchGuests(searchParams)">Search</button>-->
+    </mat-card>
+  </form>
+  
+  <!--<mat-card *ngIf=searchStarted>
+    <h4>Residents</h4>
+    <p *ngFor="let resident of residentSource.filteredData; index as i;" (click)="residentNameClick(i)"> 
+      {{resident.residentName}} at {{resident.residentAddress}}
+    </p>
+  </mat-card>-->
+     
+  <div class="middleDiv">
+    <mat-card class="guestCard topCard">
+      <!--<h4>Guests</h4>
+      <cdk-virtual-scroll-viewport itemSize="50">
+        <div *cdkVirtualFor="let guest of residentSource.filteredData; let i = index;|async" (click)="guestNameClick(i)"> 
+          {{guest.guestName}} here to visit {{guest.residentName}}
+        </div>
+      </cdk-virtual-scroll-viewport>-->
+      <!--<cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+        <div *cdkVirtualFor="let item of residentSource.filteredData" class="example-item">{{item.guestNAme}}</div>
+      </cdk-virtual-scroll-viewport>  -->
+      <mat-table class="guestTable" [dataSource]="tableSource.filteredData" *ngIf="getDone">
+  
+        <ng-template class="guestTableRows" ngFor let-key let-i="index" [ngForOf]="keys">
+          <ng-container matColumnDef={{columnNames[i]}}>
+            <mat-header-cell *matHeaderCellDef>{{columnNames[i]}}</mat-header-cell>
+            <mat-cell *matCellDef="let guest" >{{guest[key]}}</mat-cell>
+          </ng-container>
+        </ng-template>
+        
+        <mat-header-row *matHeaderRowDef="columnNames"></mat-header-row>
+        <mat-row *matRowDef="let myRowData; columns: columnNames;  let i = index"(click)="guestNameClick(i)"></mat-row>
+      </mat-table>
+      <mat-paginator [pageSize]="4" [length]="pageingLength" [pageIndex]="pageingIndex" (page)="pageEvent = paginationChange($event)"></mat-paginator>
+    </mat-card>
+    <mat-card class="botCard memberCard">
+      <p>Resident Searched Data</p>
+      <p>Name: {{residentNam}}</p>
+      <p>Address: {{residentAddres}}</p>
+      <p>Phone Number: {{phon}}</p>
+      <p>Email: {{emai}}</p>
+    </mat-card>
+  </div>
+  
+      
+  <mat-card *ngIf=submittingGuest class="submitCard">
+    <div *ngIf=!successfulRegistration>
+      <h6>Approve {{focusedGuest.guestName}} for entry?</h6>
+      <button mat-raised-button [ngStyle]="{'display': registering}" (click)="registerEntry()" class="yesButton">Yes</button>
+      <button mat-raised-button (click)="declineRegister()">No</button>
+    </div>
+    <h3 *ngIf=successfulRegistration>Successful Register</h3>
+  </mat-card>
+</div>
