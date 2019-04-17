@@ -43,7 +43,9 @@ export class InputUiTicketComponent{
     this.formGroup = new FormGroup({
       address:new FormControl(),
       type:new FormControl(),
-      status:new FormControl()
+      status:new FormControl(),
+      responsibleManager: new FormControl(),
+      notes: new FormControl()
     });
    }
 
@@ -72,11 +74,11 @@ export class InputUiTicketComponent{
 
   createPost(input :HTMLInputElement){
     let post =input;
-  
+    console.log(post);
     let face={
       "Status":post["status"],
       "actionType":post["type"],
-      "ResponsibleManager":"testyMctesttest",
+      "ResponsibleManager":post["responsibleManager"],
       "Notes":post["notes"],
       "userName":window.localStorage.getItem("username")
     }

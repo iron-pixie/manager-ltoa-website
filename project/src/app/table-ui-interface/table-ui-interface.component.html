@@ -1,7 +1,7 @@
 <button mat-mini-fab [routerLink]="inputRouterString" *ngIf="displayAddButton"><mat-icon>add</mat-icon></button>
 <mat-checkbox *ngIf="displayCheckBox" (click)="filterCheckBox()" [(ngModel)]="checked">Only show my information</mat-checkbox>
-
-<mat-table [dataSource]="dataSource">
+<div class="topLevelDiv">
+  <mat-table [dataSource]="dataSource">
 
     <ng-template ngFor let-key let-i="index" [ngForOf]="keys">
       <ng-container matColumnDef={{key}}>
@@ -22,3 +22,4 @@
     <mat-row *matRowDef="let myRowData; columns: columnDef"></mat-row>
   
   </mat-table>
+</div>

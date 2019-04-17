@@ -13,6 +13,7 @@ export class LoginComponent {
   loginFinished = false;
   loginError = false;
   userLoggedIn="";
+  invalidLevel=false;
 
   formGroup: FormGroup;
 
@@ -21,9 +22,15 @@ export class LoginComponent {
       userName:new FormControl('',[Validators.required]),
       password:new FormControl('',[Validators.required])
     });
+
   }
 
   ngOnInit() {
+  }
+
+  onType(){
+    this.invalidLevel=false;
+    this.loginError = false;
   }
 
   tryLogin(input :HTMLInputElement){
@@ -44,7 +51,7 @@ export class LoginComponent {
         if(resString.includes("ERROR")){
           this.loginError=true;
         }
-        else{
+        else if(res["userLevel"]==="manager"){
           this.loginError=false;
           this.loginFinished=true;
           this.userLoggedIn=input["userName"];
@@ -54,6 +61,9 @@ export class LoginComponent {
           window.localStorage.setItem("residentName",res["memberName"]);
           window.localStorage.setItem("residentAddress",res["memberAddress"]);
           this.router.navigate(['/web/home/'+userLevel]);
+        }
+        else{
+          this.invalidLevel=true;
         }
       });
   }

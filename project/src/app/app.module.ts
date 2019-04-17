@@ -38,6 +38,8 @@ import { RegisterEntryComponent } from './register-entry/register-entry.componen
 import { DisplayGuestsComponent } from './display-guests/display-guests.component';
 import { AddMultiGuestComponent } from './add-multi-guest/add-multi-guest.component';
 import { TableApproveUserComponent } from './table-approve-user/table-approve-user.component';
+import { CartManagerComponent } from './cart-manager/cart-manager.component';
+import { AddCartManagerComponent } from './add-cart-manager/add-cart-manager.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +72,8 @@ import { TableApproveUserComponent } from './table-approve-user/table-approve-us
     DisplayGuestsComponent,
     AddMultiGuestComponent,
     TableApproveUserComponent,
+    CartManagerComponent,
+    AddCartManagerComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,7 +103,9 @@ import { TableApproveUserComponent } from './table-approve-user/table-approve-us
         {path: 'entries',component: TableUiEntryComponent},
         {path: 'profile',component: MemberProfileComponent},
         {path: 'registerEntry',component: RegisterEntryComponent},
-        {path: 'approveUser', component: TableApproveUserComponent}
+        {path: 'approveUser', component: TableApproveUserComponent},
+        {path: 'cartManager', component: CartManagerComponent},
+        {path: 'cartManager/add', component: AddCartManagerComponent},
       ]},
       {path: 'login', component: LoginComponent},
       {path: 'register',component: RegisterComponent},

@@ -1,3 +1,19 @@
 mat-divider{
     margin:10px;
 }
+
+button{
+    margin-left: 5px;
+}
+
+.topLevelDiv{
+    position: fixed;
+    width: 95%;
+    height: 83%;
+    left: 2.5%;
+    top: 12%;
+    outline-color: #f5b719;
+    outline-style: double;
+    outline-width: 10px;
+    z-index:10;
+}

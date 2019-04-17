@@ -79,7 +79,8 @@ export class InputUiWorkorderComponent{
       "workType":input["type"],
       "ResponsibleManager":input["responsibleManager"],
       "Notes":input["notes"],
-      "userName":window.localStorage.getItem("username")
+      "userName":window.localStorage.getItem("username"),
+      "Address":input["address"]
     }
 
     let jsonFace=JSON.stringify(face)

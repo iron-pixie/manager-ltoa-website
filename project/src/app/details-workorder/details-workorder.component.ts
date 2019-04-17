@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MessageService } from '../services/message-service.service';
 import { Http } from '@angular/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import * as AWS from 'aws-sdk/global';
 import * as S3 from 'aws-sdk/clients/s3';
 import { Location } from '@angular/common';
@@ -28,18 +29,19 @@ export class DetailsWorkorderComponent implements OnInit {
   storedImages:any=[""];
   imageReadyToSubmit = true;
   imagesToDelete:any=[];
+  initialData;
 
-  status = [
+  statuses = [
     {value:"pending",viewValue:"pending"},
     { value:"complete",viewValue:"complete"}
   ]
 
-  type =[
+  types =[
     {value:"Traffic violations",viewValue:"Traffic violations"},
     {value:"Trashcan violations",viewValue:"Trashcan violations"}
   ]
 
-  constructor(private route: ActivatedRoute, private messageService: MessageService, private http:Http,private location: Location) { 
+  constructor(private route: ActivatedRoute, private messageService: MessageService, private http:Http,private location: Location, private httpC:HttpClient) { 
 
     this.formGroup = new FormGroup({
       address:new FormControl(),
@@ -57,14 +59,19 @@ export class DetailsWorkorderComponent implements OnInit {
 
     this.getImages();
 
-    this.http.get('http://backend-ipt.us-west-2.elasticbeanstalk.com/work/'+this.id)
+    this.http.get('https://d1jq46p2xy7y8u.cloudfront.net/work/'+this.id)
     .subscribe(response=>{
       let data=response.json();
-      this.addressValue=data.MemberAddress;
+      this.initialData=data;
+      this.addressValue=data.Address;
       this.dateValue=data.CreationDate;
       this.responsibleManagerValue=data.ResponsibleManager;
       this.fineValue=data.Fine;
       this.notesValue=data.Notes;
+      this.formGroup.get("type").setValue(data.workType);
+      this.formGroup.get("status").setValue(data.Status);
+      this.formGroup.get("createDate").disable();
+      this.formGroup.get("type").disable();
     });
   }
 
@@ -105,9 +112,39 @@ export class DetailsWorkorderComponent implements OnInit {
 
     values["id"]=this.id;
 
-    this.messageService.sendMessage("details",values);
+    this.updateDB(values);
 
     this.back();
+  }
+
+  updateDB(values){
+    console.log(values);
+    console.log(this.formGroup.get("address").touched);
+    let body ={"WorkId":values["id"]};
+    
+    if(values["address"]!==this.initialData.Address && values["address"]!==null){
+      body["Address"] = values["address"];
+    }
+
+    if(values["status"]!==this.initialData.Status && values["status"]!==null){
+      body["Status"] = values["status"];
+    }
+
+    if(values["responsibleManager"]!==this.initialData.ResponsibleManager && values["responsibleManager"]!==null){
+      body["ResponsibleManager"] = values["responsibleManager"];
+    }
+
+    if(values["notes"]!==this.initialData.Notes && values["notes"]!==null){
+      body["Notes"] = values["notes"];
+    }
+    
+    console.log(body);
+    
+    let headersVar = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
+
+    this.httpC.post('https://d1jq46p2xy7y8u.cloudfront.net/work/update',body,{headers: headersVar,responseType: "text"})
+      .subscribe((res) => {
+      });
   }
 
   imageChange(fileInput){

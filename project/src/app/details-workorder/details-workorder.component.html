@@ -17,10 +17,10 @@
         </mat-form-field>
                 
         <mat-form-field>
-          <mat-select 
+          <mat-select
             class="form-control"
             formControlName="type"
-            placeholder="Type of the violation"
+            placeholder="Type of the workorder"
             required>
             <mat-option 
               *ngFor="let type of types" 
@@ -34,11 +34,11 @@
         </mat-form-field>
                     
         <mat-form-field>
-          <input 
+          <input
             class="form-control"
             formControlName="createDate"
             matInput 
-            placeholder="Todays Date" 
+            placeholder="Date Work order was created" 
             value="{{dateValue}}"
             required>
             <mat-error *ngIf=true>
@@ -98,8 +98,8 @@
   <div class="column">
     <mat-card class='ticket-picture-card'>
       <h3>Photos</h3>
-      <input type="file" (change)="imageChange($event)" placeholder="Upload pictures related to this task">
-      <button (click)="imageSubmit()" [disabled]="imageReadyToSubmit">submit Image</button>
+      <input mat-raised-button type="file" (change)="imageChange($event)" placeholder="Upload pictures related to this task">
+      <button mat-raised-button (click)="imageSubmit()" [disabled]="imageReadyToSubmit">submit Image</button>
     </mat-card> 
   </div> 
 </div>
