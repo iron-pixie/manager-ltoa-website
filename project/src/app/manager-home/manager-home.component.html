@@ -5,4 +5,31 @@
 <button mat-raised-button routerLink="/web/approveUser">Approve Users</button>
 <button mat-raised-button routerLink="/web/cartManager">Carts</button>
 <button mat-raised-button (click)="logout()">Logout</button>
-<div class="topLevelDiv"></div>
+<div class="topLevelDiv">
+    <div class="groupDiv" *ngFor="let individual of groupInfo; let i = index">
+        <h4>{{groupLabels[i]}}</h4>
+        <div class="innerDiv">
+            <mat-table [dataSource]="individual">
+                <ng-container matColumnDef=Id>
+                    <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+                    <mat-cell *matCellDef="let member">{{member["id"]}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef=Type>
+                    <mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
+                    <mat-cell *matCellDef="let member">{{member["type"]}}</mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="Details">
+                <mat-header-cell *matHeaderCellDef>Details</mat-header-cell>
+                <mat-cell *matCellDef="let member">  
+                    <button mat-raised-button (click)="navigate(groupRoutes[i]+member['id'])" >details</button>
+                </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="Keys"></mat-header-row>
+                <mat-row *matRowDef="let myRowData; columns: Keys"></mat-row>           
+            </mat-table>
+        </div>
+            
+    </div>
+</div>

@@ -74,7 +74,6 @@ export class InputUiTicketComponent{
 
   createPost(input :HTMLInputElement){
     let post =input;
-    console.log(post);
     let face={
       "Status":post["status"],
       "actionType":post["type"],

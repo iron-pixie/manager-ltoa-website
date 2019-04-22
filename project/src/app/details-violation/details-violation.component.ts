@@ -64,8 +64,6 @@ export class DetailsViolationComponent implements OnInit {
       responsibleManager:new FormControl(),
       fine:new FormControl(),
       notes:new FormControl()
-
-      
   })
 
   this.sub = this.route.params.subscribe(params => {
@@ -77,7 +75,6 @@ export class DetailsViolationComponent implements OnInit {
   this.http.get('https://d1jq46p2xy7y8u.cloudfront.net/violation/'+this.id)
     .subscribe(response=>{
       let data=response.json();
-      console.log(data);
       this.initialData=data;
       this.addressValue=data.MemberAddress;
       this.dateValue=data.CreationDate;
@@ -128,8 +125,6 @@ export class DetailsViolationComponent implements OnInit {
     values["id"]=this.id;
 
     this.updateDB(values);
-
-    this.back();
   }
 
   updateDB(values){
@@ -161,6 +156,7 @@ export class DetailsViolationComponent implements OnInit {
 
     this.httpC.post('https://d1jq46p2xy7y8u.cloudfront.net/violation/update',body,{headers: headersVar,responseType: "text"})
       .subscribe((res) => {
+        this.back();
       });
   }
  
@@ -194,6 +190,13 @@ export class DetailsViolationComponent implements OnInit {
   }
 
   back(){
+    let back = function(location):void{
+      location.back();
+    }
+    setTimeout(back,2000,this.location);
+  }
+
+  backImmediately(){
     this.location.back();
   }
 

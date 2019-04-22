@@ -6,20 +6,6 @@
       <mat-cell *matCellDef="let guest">{{guest[key]}}</mat-cell>
     </ng-container>
   </ng-template>
-
-  <!--<ng-container matColumnDef="Picture">
-    <mat-header-cell *matHeaderCellDef>Pictures</mat-header-cell>
-    <mat-cell *matCellDef="let guest">  
-      <img onerror='this.style.display = "none"' src="https://s3-us-west-2.amazonaws.com/ipt-photo-bucket/g{{guest.guestName}}-{{guest.residentAddress}}.png">
-    </mat-cell>
-  </ng-container>-->
-
-  <!--<ng-container matColumnDef="Register">
-    <mat-header-cell *matHeaderCellDef></mat-header-cell>
-    <mat-cell *matCellDef="let guest">
-      <button mat-raised-button (click)="deleteGuest(guest)">delete</button>
-    </mat-cell>
-  </ng-container>-->
   
   <mat-header-row *matHeaderRowDef="columnNames"></mat-header-row>
   <mat-row *matRowDef="let myRowData; columns: columnNames"></mat-row>

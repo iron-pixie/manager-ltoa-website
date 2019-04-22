@@ -17,3 +17,18 @@ button{
     outline-width: 10px;
     z-index:10;
 }
+
+.groupDiv{
+    margin-top:2.5%;
+    margin-left:2.5%;
+    width:95%;
+    height:30%;
+}
+
+.innerDiv{
+    overflow-y:scroll;
+}
+
+h4{
+    text-align: center;
+}

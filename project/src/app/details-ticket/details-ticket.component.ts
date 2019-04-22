@@ -6,6 +6,7 @@ import { Http } from '@angular/http';
 import { Location } from '@angular/common';
 import * as AWS from 'aws-sdk/global';
 import * as S3 from 'aws-sdk/clients/s3';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 let parseString = require('xml2js').parseString;
 
 @Component({
@@ -27,6 +28,7 @@ export class DetailsTicketComponent implements OnInit {
   newImages:any=[];
   storedImages:any=[""];
   imageReadyToSubmit = true;
+  initialData;
 
   bucket = new S3(
     {
@@ -46,12 +48,10 @@ export class DetailsTicketComponent implements OnInit {
     {value:"Trashcan violations",viewValue:"Trashcan violations"}
   ]
 
-  constructor(private route: ActivatedRoute, private messageService: MessageService, private http: Http, private location:Location) { 
+  constructor(private route: ActivatedRoute, private messageService: MessageService, private http: Http, private location:Location, private httpC:HttpClient) { 
     this.formGroup = new FormGroup({
-      address:new FormControl(),
       type:new FormControl(),
       createDate:new FormControl(),
-      associatedParties:new FormControl(),
       status:new FormControl(),
       responsibleManager:new FormControl(),
       notes:new FormControl()
@@ -66,9 +66,14 @@ export class DetailsTicketComponent implements OnInit {
     this.http.get('https://d1jq46p2xy7y8u.cloudfront.net/action/'+this.id)
     .subscribe(response=>{
       let data=response.json();
+      this.initialData=data;
       this.dateValue=data.CreationDate;
       this.responsibleManagerValue=data.ResponsibleManager;
       this.notesValue=data.Notes;
+      this.formGroup.get("type").setValue(data.actionType);
+      this.formGroup.get("status").setValue(data.Status);
+      this.formGroup.get("type").disable();
+      this.formGroup.get("createDate").disable();
     });
   }
 
@@ -104,7 +109,8 @@ export class DetailsTicketComponent implements OnInit {
 
     values["id"]=this.id;
 
-    this.messageService.sendMessage("details",values);
+    this.updateDB(values);
+
     //push data to server
   }
 
@@ -130,11 +136,43 @@ export class DetailsTicketComponent implements OnInit {
 
   delete(){
     this.http.delete('https://d1jq46p2xy7y8u.cloudfront.net/action/'+this.id)
-      .subscribe(()=>{this.back()})
+      .subscribe((res)=>{this.back})
   }
 
   back(){
+    let back = function(location):void{
+      location.back();
+    }
+    setTimeout(back,2000,this.location);
+  }
+
+  backImmediately(){
     this.location.back();
+  }
+
+  updateDB(values){
+    let body ={"actionId":values["id"]};
+
+    if(values["status"]!==this.initialData.Status && values["status"]!==null){
+      body["Status"] = values["status"];
+    }
+
+    if(values["responsibleManager"]!==this.initialData.ResponsibleManager && values["responsibleManager"]!==null){
+      body["ResponsibleManager"] = values["responsibleManager"];
+    }
+
+    if(values["notes"]!==this.initialData.Notes && values["notes"]!==null){
+      body["Notes"] = values["notes"];
+    }
+
+    console.log(body);
+
+    let headersVar = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
+
+    this.httpC.post('https://d1jq46p2xy7y8u.cloudfront.net/action/update',body,{headers: headersVar,responseType: "text"})
+      .subscribe((res) => {
+        this.back();
+      });
   }
 
 }

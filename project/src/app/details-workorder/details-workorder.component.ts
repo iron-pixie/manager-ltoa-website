@@ -113,8 +113,6 @@ export class DetailsWorkorderComponent implements OnInit {
     values["id"]=this.id;
 
     this.updateDB(values);
-
-    this.back();
   }
 
   updateDB(values){
@@ -144,6 +142,7 @@ export class DetailsWorkorderComponent implements OnInit {
 
     this.httpC.post('https://d1jq46p2xy7y8u.cloudfront.net/work/update',body,{headers: headersVar,responseType: "text"})
       .subscribe((res) => {
+        this.back();
       });
   }
 
@@ -179,7 +178,7 @@ export class DetailsWorkorderComponent implements OnInit {
     this.http.delete('https://d1jq46p2xy7y8u.cloudfront.net/work/'+this.id)
       .subscribe(()=>{
         this.deletePhotos();
-        this.back()
+        this.back();
       })
   }
 
@@ -205,6 +204,13 @@ export class DetailsWorkorderComponent implements OnInit {
   }
 
   back(){
+    let back = function(location):void{
+      location.back();
+    }
+    setTimeout(back,2000,this.location);
+  }
+
+  backImmediately(){
     this.location.back();
   }
 }

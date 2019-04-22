@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TableUiInterfaceComponent } from '../table-ui-interface/table-ui-interface.component';
 import { MatTableDataSource } from '@angular/material';
-import { MessageService } from '../services/message-service.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Http } from '@angular/http';
 
@@ -20,7 +19,7 @@ export class TableUiViolationComponent extends TableUiInterfaceComponent impleme
   userLevel;
   displayCheckBox=false;
 
-  constructor(private messageService: MessageService, private http:Http) {
+  constructor(private http:Http) {
     super();
     this.includeDetails=true;
     this.inputRouterString="/web/violations/add";
