@@ -5,6 +5,7 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Location } from '@angular/common';
 import * as AWS from 'aws-sdk/global';
 import * as S3 from 'aws-sdk/clients/s3';
+import { MatTableDataSource,MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'input-ui-ticket',
@@ -19,6 +20,7 @@ export class InputUiTicketComponent{
   routingString:string;
   img;
   newImages=null;
+  residentAddressSource;
 
   bucket = new S3(
     {
@@ -47,6 +49,17 @@ export class InputUiTicketComponent{
       responsibleManager: new FormControl(),
       notes: new FormControl()
     });
+    let headersVar = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
+    http.get('https://d1jq46p2xy7y8u.cloudfront.net/member/all',{headers: headersVar})
+    .subscribe(response => {
+      let dataResponse=null;
+      dataResponse=response;
+      response=null;
+      this.residentAddressSource = new MatTableDataSource(dataResponse); 
+      this.residentAddressSource.filterPredicate = function(data,residentAddress): boolean{
+        return data.memberAddress.toLowerCase().trim().includes(residentAddress);
+      }
+    })
    }
 
   ngOnInit() {
@@ -91,6 +104,10 @@ export class InputUiTicketComponent{
         }
         this.back();
       });
+  }
+
+  filterResidentData(){
+    this.residentAddressSource.filter = this.formGroup.get("address").value;
   }
 
   submit(form){

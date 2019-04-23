@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MessageService } from '../services/message-service.service';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { MatTableDataSource,MatPaginator } from '@angular/material';
 import { Location } from '@angular/common';
 import * as AWS from 'aws-sdk/global';
 import * as S3 from 'aws-sdk/clients/s3';
@@ -20,6 +21,7 @@ export class InputUiWorkorderComponent{
   routingString:string;
   img;
   newImages=null;
+  residentAddressSource;
 
   bucket = new S3(
     {
@@ -48,6 +50,17 @@ export class InputUiWorkorderComponent{
       responsibleManager:new FormControl(),
       notes: new FormControl()
     });
+    let headersVar = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
+    http.get('https://d1jq46p2xy7y8u.cloudfront.net/member/all',{headers: headersVar})
+    .subscribe(response => {
+      let dataResponse=null;
+      dataResponse=response;
+      response=null;
+      this.residentAddressSource = new MatTableDataSource(dataResponse); 
+      this.residentAddressSource.filterPredicate = function(data,residentAddress): boolean{
+        return data.memberAddress.toLowerCase().trim().includes(residentAddress);
+      }
+    })
    }
 
   ngOnInit() {
@@ -55,6 +68,10 @@ export class InputUiWorkorderComponent{
 
   imageChange(fileInput){
     this.newImages= <Array<File>> fileInput.target.files;
+  }
+
+  filterResidentData(){
+    this.residentAddressSource.filter = this.formGroup.get("address").value;
   }
 
   imageSubmit(id){

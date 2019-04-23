@@ -116,8 +116,6 @@ export class DetailsWorkorderComponent implements OnInit {
   }
 
   updateDB(values){
-    console.log(values);
-    console.log(this.formGroup.get("address").touched);
     let body ={"WorkId":values["id"]};
     
     if(values["address"]!==this.initialData.Address && values["address"]!==null){
@@ -135,8 +133,6 @@ export class DetailsWorkorderComponent implements OnInit {
     if(values["notes"]!==this.initialData.Notes && values["notes"]!==null){
       body["Notes"] = values["notes"];
     }
-    
-    console.log(body);
     
     let headersVar = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
 

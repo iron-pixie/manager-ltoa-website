@@ -4,16 +4,25 @@
         <div class="form-group"> 
       
           <mat-form-field class="example-full-width">
-                <input 
-                  class="form-control"
-                  formControlName="address"
-                  matInput 
-                  placeholder="Address" 
-                  value="{{addressValue}}"
-                  required>
-                  <mat-error *ngIf=true>
-                    Address is required
-                  </mat-error>
+            <input 
+              class="form-control"
+              formControlName="address"
+              matInput 
+              placeholder="Address" 
+              value="{{addressValue}}"
+              required
+              [matAutocomplete]="autoName"
+              (keyup)="filterResidentData()">
+            <mat-error *ngIf=true>
+              Address is required
+            </mat-error>
+            <mat-autocomplete #autoName="matAutocomplete">
+              <mat-option 
+                *ngFor="let option of residentAddressSource?.filteredData;let i = index" 
+                [value]="option.memberAddress.trim()">
+                {{option.memberAddress.trim()}}
+              </mat-option>
+            </mat-autocomplete>
           </mat-form-field>
                   
           <mat-form-field>
