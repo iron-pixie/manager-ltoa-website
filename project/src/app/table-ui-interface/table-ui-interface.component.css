@@ -7,4 +7,8 @@
     outline-color: #f5b719;
     outline-style: double;
     outline-width: 10px;
+    overflow: auto;
+}
+mat-raised-button{
+    width: 50px;
 }

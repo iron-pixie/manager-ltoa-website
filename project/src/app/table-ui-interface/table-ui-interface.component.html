@@ -1,4 +1,4 @@
-<button mat-mini-fab [routerLink]="inputRouterString" *ngIf="displayAddButton"><mat-icon>add</mat-icon></button>
+<button mat-raised-button [routerLink]="inputRouterString" *ngIf="displayAddButton"><mat-icon>add</mat-icon></button>
 <mat-checkbox *ngIf="displayCheckBox" (click)="filterCheckBox()" [(ngModel)]="checked">Only show my information</mat-checkbox>
 <div class="topLevelDiv">
   <mat-table [dataSource]="dataSource">

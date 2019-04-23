@@ -21,12 +21,14 @@ button{
 .groupDiv{
     margin-top:2.5%;
     margin-left:2.5%;
-    width:95%;
-    height:30%;
+    width:30%;
+    height:100%;
+    float: left;
 }
 
 .innerDiv{
-    overflow-y:scroll;
+    overflow-y:auto;
+    max-height: 400px;
 }
 
 h4{
