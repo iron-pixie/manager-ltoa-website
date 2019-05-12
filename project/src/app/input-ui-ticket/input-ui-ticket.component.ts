@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { MessageService } from '../services/message-service.service';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Location } from '@angular/common';
 import * as AWS from 'aws-sdk/global';
@@ -40,7 +39,7 @@ export class InputUiTicketComponent{
     {value:"Trashcan violations",viewValue:"Trashcan violations"}
   ]
 
-  constructor(private messageService: MessageService, private http:HttpClient, private location:Location) {
+  constructor(private http:HttpClient, private location:Location) {
     this.routingString="/tickets"
     this.formGroup = new FormGroup({
       address:new FormControl(),
@@ -63,11 +62,6 @@ export class InputUiTicketComponent{
    }
 
   ngOnInit() {
-  }
-
-  sendMessage(message): void {
-    // send message to subscribers via observable subject
-    this.messageService.sendMessage("input",message);
   }
 
   imageSubmit(id){

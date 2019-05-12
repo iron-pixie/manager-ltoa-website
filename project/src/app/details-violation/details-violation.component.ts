@@ -150,8 +150,6 @@ export class DetailsViolationComponent implements OnInit {
       body["Fine"] = values["fine"];
     }
 
-    console.log(body);
-
     let headersVar = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
 
     this.httpC.post('https://d1jq46p2xy7y8u.cloudfront.net/violation/update',body,{headers: headersVar,responseType: "text"})

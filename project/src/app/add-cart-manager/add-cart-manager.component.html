@@ -1,3 +1,92 @@
-<p>
-  add-cart-manager works!
-</p>
+<form [formGroup]="formGroup">
+  <div class="form-group">
+
+    <mat-divider></mat-divider>
+
+    <mat-form-field class="example-full-width">
+      <input 
+        class="form-control"
+        formControlName="address"
+        matInput 
+        placeholder="Address" 
+        value=""
+        required
+        [matAutocomplete]="autoName"
+        (keyup)="filterResidentData()">
+      <mat-error *ngIf=true>
+        Address is required
+      </mat-error>
+      <mat-autocomplete #autoName="matAutocomplete">
+        <mat-option 
+          *ngFor="let option of residentAddressSource?.filteredData;let i = index" 
+          [value]="option.memberAddress.trim()">
+          {{option.memberAddress.trim()}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-divider></mat-divider>
+
+    <mat-form-field>
+      <input 
+        class="form-control"
+        formControlName="cartMake"
+        matInput 
+        placeholder="Cart Make" 
+        value=""
+        required>
+      <mat-error *ngIf=true>
+        Cart Make is required
+      </mat-error>
+    </mat-form-field>
+      
+    <mat-divider></mat-divider>
+
+    <mat-form-field>
+      <input 
+        class="form-control"
+        formControlName="cartModel"
+        matInput 
+        placeholder="Cart Model" 
+        value=""
+        required>
+      <mat-error *ngIf=true>
+        Cart Model is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-divider></mat-divider>
+
+    <mat-form-field class="example-full-width">
+      <input 
+        class="form-control"
+        formControlName="serialNumber"
+        matInput 
+        placeholder="Serial Number" 
+        value=""
+        required>
+      <mat-error *ngIf=true>
+        Serial Number is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-divider></mat-divider>
+
+    <mat-form-field class="example-full-width">
+      <input 
+        class="form-control"
+        formControlName="labelNumber"
+        matInput 
+        placeholder="Label Number" 
+        value=""
+        required>
+        <mat-error *ngIf=true>
+          Label Number is required
+        </mat-error>
+  </mat-form-field>
+
+  <mat-divider></mat-divider>
+    <button mat-raised-button type="button" [disabled]="formGroup.invalid" (click)="submit(formGroup)">submit</button>
+    <button mat-raised-button type="button" (click)="back()">cancel</button>
+</div> 
+</form>

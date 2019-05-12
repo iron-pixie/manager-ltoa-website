@@ -165,12 +165,11 @@ export class DetailsTicketComponent implements OnInit {
       body["Notes"] = values["notes"];
     }
 
-    console.log(body);
-
     let headersVar = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
 
     this.httpC.post('https://d1jq46p2xy7y8u.cloudfront.net/action/update',body,{headers: headersVar,responseType: "text"})
       .subscribe((res) => {
+        console.log(res);
         this.back();
       });
   }
