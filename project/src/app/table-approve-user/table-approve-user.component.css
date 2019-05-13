@@ -6,17 +6,7 @@ mat-card{
     margin-top:10px;
 }
 
-.topLevelDiv{
-    position: fixed;
-    width: 95%;
-    height: 83%;
-    left: 2.5%;
-    top: 12%;
-    outline-color: #f5b719;
-    outline-style: double;
-    outline-width: 10px;
-    z-index:10;
-}
+
 
 .approveButton{
     margin-right:5px;

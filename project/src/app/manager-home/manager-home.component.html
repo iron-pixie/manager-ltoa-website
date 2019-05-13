@@ -1,12 +1,15 @@
-<button mat-raised-button routerLink="/web/workorders/all">Work Orders</button>
-<button mat-raised-button routerLink="/web/violations">Violations</button>
-<button mat-raised-button routerLink="/web/tickets">Tickets</button>
-<button mat-raised-button routerLink="/web/entries">Recent Entries</button>
-<button mat-raised-button routerLink="/web/approveUser">Approve Users</button>
-<button mat-raised-button routerLink="/web/cartManager">Carts</button>
-<button mat-raised-button (click)="logout()">Logout</button>
+
+<div id="drop"><button id="bar" mat-raised-button (window:resize)="dropit()" (click)="dropdown()">menu</button></div>
+<ul id="menu" *ngIf="drop">
+<li><button mat-raised-button routerLink="/web/workorders/all">Work Orders</button></li>
+<li><button mat-raised-button routerLink="/web/violations">Violations</button></li>
+<li><button mat-raised-button routerLink="/web/tickets">Tickets</button></li>
+<li><button mat-raised-button routerLink="/web/entries">Recent Entries</button></li>
+<li><button mat-raised-button routerLink="/web/approveUser">Approve Users</button></li>
+<li><button mat-raised-button routerLink="/web/cartManager">Carts</button></li>
+<li><button mat-raised-button (click)="logout()">Logout</button></ul>
 <div class="topLevelDiv">
-    <div class="groupDiv" *ngFor="let individual of groupInfo; let i = index">
+    <div id="groupDiv" *ngFor="let individual of groupInfo; let i = index">
         <h4>{{groupLabels[i]}}</h4>
         <div class="innerDiv">
             <mat-table [dataSource]="individual">

@@ -14,5 +14,37 @@ mat-form-field{
     padding-left:20px;
     width:300px;
 }
+.topLevelDiv{
+    position: fixed;
+    width: 95%;
+
+    height: 83%;
+    left: 2.5%;
+    top: 12%;
+    outline-color: #f5b719;
+    outline-style: double;
+    outline-width: 10px;
+    z-index:10;
+    overflow: auto;
+
+}
+
+.outterDiv{
+    display: block;
+    margin: 50px;
+    list-style-type: none;
+    margin: 0px;
+    
+    padding: 0px;
+    z-index: 11;
+
+
+    position: relative;
+
+    left: 140px;
+}
+.outterDiv li{
+    float: left;
+}
 
 html { background-color: #FFFFFF }

@@ -1,36 +1,84 @@
 mat-divider{
     margin:10px;
+
 }
 
 button{
-    margin-left: 5px;
+    width: 140px;
+
+
 }
 
-.topLevelDiv{
-    position: fixed;
-    width: 95%;
-    height: 83%;
-    left: 2.5%;
-    top: 12%;
-    outline-color: #f5b719;
-    outline-style: double;
-    outline-width: 10px;
-    z-index:10;
+#bar{
+
+    z-index: 12;
+
+    top: 0px;
+    height: 36px;
+    left: 140px;
+    float: left;
+    position: absolute;
+
+
+}
+li{
+    margin: 0px;
+
+}
+#menu{
+    margin-left: 0px;
+    margin-top: 36px;
+    margin-right: 0px;
+    
+    padding: 0px;
+    z-index: 11;
+
+
+    position: relative;
+
+    left: 140px;
+    display: inline-block;
+
+   list-style-type: none;
+
 }
 
-.groupDiv{
+#groupDiv{
     margin-top:2.5%;
     margin-left:2.5%;
-    width:30%;
+    width: 100%;
     height:100%;
-    float: left;
+    float: none;
+
 }
 
 .innerDiv{
     overflow-y:auto;
     max-height: 400px;
+
+
 }
 
 h4{
     text-align: center;
+
 }
+#bar{
+    margin-bottom: 200px;
+
+}
+
+@media (min-width: 1000px) {
+    #bar { display: none; }
+    #groupDiv{ float: left; width: 30%;}
+
+    #menu{
+        margin-top: 0px;
+
+    }
+    li{
+        float: left;
+        
+
+    }
+  }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http } from '@angular/http';
 import { MatTableDataSource } from '@angular/material';
+import { WSAEINVALIDPROVIDER } from 'constants';
 
 @Component({
   selector: 'manager-home',
@@ -9,7 +10,7 @@ import { MatTableDataSource } from '@angular/material';
   styleUrls: ['./manager-home.component.css']
 })
 export class ManagerHomeComponent implements OnInit {
-
+  drop=false;
   groupInfo=[];
   groupIdNames=["violationId","workorderId","actionId"];
   groupTypeNames=["violationType","workorderType","actionType"];
@@ -27,6 +28,25 @@ export class ManagerHomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(window.innerWidth >= 1000){
+      this.drop = !this.drop;
+
+    }
+
+  }
+
+  dropdown(){
+    this.drop = !this.drop;
+  }
+  dropit(){
+    if(window.innerWidth >= 1000){
+      this.drop = true;
+
+    }
+    else{
+      this.drop = !this.drop;
+    }
+    
   }
 
   logout(){

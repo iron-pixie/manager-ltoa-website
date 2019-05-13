@@ -1,8 +1,13 @@
 .mat-raised-button{
     border:100px;
+
 }
 
 .tab{
-    margin-top: 1%;
-    margin-left: 2%;
+    margin: 0px;
+    width: 140px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 25;
 }

@@ -18,6 +18,8 @@ h3{
     float:left;
     width:30%;
     padding:5px;
+    margin-top: 50px;
+
 }
 
 .submitButton{
@@ -32,3 +34,8 @@ img{
     width:80%;
     height:50%;
 }
+@media (max-width: 768px) {
+    .column{
+        width: 100%;
+    }
+  }

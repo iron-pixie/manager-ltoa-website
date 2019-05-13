@@ -1,14 +1,4 @@
-.topLevelDiv{
-    position: fixed;
-    width: 95%;
-    height: 90%;
-    left: 2.5%;
-    top: 5%;
-    outline-color: #f5b719;
-    outline-style: double;
-    outline-width: 10px;
-    overflow: auto;
-}
 mat-raised-button{
     width: 50px;
+
 }

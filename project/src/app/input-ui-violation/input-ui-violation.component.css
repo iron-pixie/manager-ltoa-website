@@ -15,9 +15,13 @@ h3{
 }
 
 .column{
-    float:left;
-    width:25%;
+
+
     padding:5px;
+    position: relative;
+    margin: auto;
+    display: inline-block;
+
 }
 
 .submitButton{
